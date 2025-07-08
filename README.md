@@ -96,7 +96,7 @@ http://127.0.0.1:5000
 ## 👨‍💻 Developed By
 
 **Nomula Nagarjuna Reddy**
-BVRIT Hyderabad
+BVRIT Narsapur
 Final Year – CSE
 
 Happy coding! 💻✨
