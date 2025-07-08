@@ -1,0 +1,65 @@
+<!-- templates/schedule.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Scheduler</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .table th, .table td { vertical-align: middle; }
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .icon-button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4"><span>📅</span> Intelligent Task Scheduler</h2>
+
+    <div class="mb-3 d-flex gap-2">
+        <a href="{{ url_for('add_task') }}" class="btn btn-primary">➕ Add New Task</a>
+        <a href="{{ url_for('view_tasks') }}" class="btn btn-info text-white">📋 View All Tasks</a>
+        <a href="{{ url_for('download_tasks') }}" class="btn btn-success">⬇️ Download Tasks (CSV)</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Task</th>
+                <th>Scheduled Date</th>
+                <th>Effort (hrs)</th>
+                <th>Priority</th>
+                <th>Urgency</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in schedule %}
+            <tr>
+                <td>{{ task.TaskName }}</td>
+                <td>{{ task.ScheduledDate }}</td>
+                <td>{{ task.EffortHours }}</td>
+                <td>{{ task.Priority }}</td>
+                <td>{{ task.Urgency }}</td>
+                <td>{{ task.Completed }}</td>
+                <td>
+                    <a href="{{ url_for('mark_complete', task_id=task.TaskID) }}" class="btn btn-success btn-sm">✔</a>
+                    <a href="{{ url_for('edit', task_id=task.TaskID) }}" class="btn btn-warning btn-sm">✏️</a>
+                    <a href="{{ url_for('delete', task_id=task.TaskID) }}" class="btn btn-danger btn-sm">🗑️</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="7" class="text-center">No tasks scheduled.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
